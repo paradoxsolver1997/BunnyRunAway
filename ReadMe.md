@@ -216,6 +216,8 @@ GPL3 - see [LICENSE](LICENSE)
 
 ## ❤️ Special Thanks
 
+Some images are generated using AI technology. Some code is written with the assistance of AI programming tools.
+
 For open source and media attributions, see [`docs/credits.html`](docs/credits.html).
 
 ## 🤝 Contributing
