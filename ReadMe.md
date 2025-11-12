@@ -1,8 +1,12 @@
 # 🐰 Bunny Runaway Web
 
+![License](https://img.shields.io/github/license/paradoxsolver1997/BunnyRunAway)
+![Platform](https://img.shields.io/badge/platform-web-blue)
+[![Play Online](https://img.shields.io/badge/demo-play%20now-brightgreen)](https://bunny.paradoxsolver.com/)
+
 An open-source and modular JavaScript game project featuring intelligent pathfinding and a modern UI. This repository is intended for developers and learners interested in game architecture, AI, and browser-based game development.
 
-### Links
+## 🔗Links
 
 - Simply try out the game at: [`https://bunny.paradoxsolver.com/`](https://bunny.paradoxsolver.com/).
 
@@ -18,7 +22,7 @@ An open-source and modular JavaScript game project featuring intelligent pathfin
 - **Modular Codebase**: Clean, maintainable, and extensible structure
 - **Modern UI**: Attractive interface and smooth user experience
 
-## Requirements
+## 📌Requirements
 
 - Any modern web browser (Chrome, Firefox, Edge, Safari, etc.)
 - Interpreter, one of the following two:
