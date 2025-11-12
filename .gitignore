@@ -1,0 +1,316 @@
+# ===========================================
+# Bunny Ranaway Web - Git Ignore 配置
+# ===========================================
+
+# ===========================================
+# 构建输出目录
+# ===========================================
+# 生产版本目录（包含混淆后的代码）
+dist/
+build/dist/
+
+# ===========================================
+# 临时文件和缓存
+# ===========================================
+# 混淆后的临时文件
+*.obfuscated.js
+**/*.obfuscated.js
+
+# 临时构建文件
+*.tmp
+*.temp
+*.cache
+*.log
+
+# 编辑器临时文件
+*~
+.#*
+\#*#
+.*.swp
+.*.swo
+*~
+
+# ===========================================
+# 开发工具和IDE
+# ===========================================
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# WebStorm/IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ===========================================
+# Node.js 和 npm
+# ===========================================
+# 依赖目录
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# 运行时数据
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# 覆盖率目录
+lib-cov
+coverage/
+*.lcov
+
+# nyc 测试覆盖率
+.nyc_output
+
+# Grunt 中间存储
+.grunt
+
+# Bower 依赖目录
+bower_components
+
+# ===========================================
+# Rust 和 WASM 构建文件
+# ===========================================
+# Rust 构建目录
+wasm-bunny-ai/target/
+wasm-bunny-ai/pkg/
+wasm-bunny-ai/Cargo.lock
+
+# WASM 构建输出
+*.wasm
+*.wasm.map
+*.wasm.d.ts
+
+# Rust 编译缓存
+**/target/
+**/Cargo.lock
+
+# ===========================================
+# 操作系统文件
+# ===========================================
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===========================================
+# 游戏开发相关
+# ===========================================
+# 游戏存档和用户数据
+saves/
+userdata/
+*.save
+*.sav
+
+# 调试和日志文件
+debug/
+logs/
+*.log
+*.debug
+
+# 性能分析文件
+*.prof
+*.trace
+
+# ===========================================
+# 部署和发布
+# ===========================================
+# 部署包
+deploy/itch.io/package/
+deploy/cloudflare/_redirects
+
+# 发布文件
+release/
+publish/
+
+# ===========================================
+# 安全和敏感信息
+# ===========================================
+# 环境变量文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 密钥和证书
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# 配置文件（包含敏感信息）
+config/secrets.json
+config/production.json
+secrets/
+
+# ===========================================
+# 测试和开发
+# ===========================================
+# 测试输出
+test-results/
+test-reports/
+coverage/
+
+# 开发服务器
+.dev-server/
+.dev/
+
+# 热重载文件
+.hot-reload/
+
+# ===========================================
+# 媒体和资源
+# ===========================================
+# 临时媒体文件
+temp-assets/
+temp-media/
+*.tmp.audio
+*.tmp.video
+*.tmp.image
+
+# 压缩包
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tar.bz2
+
+# ===========================================
+# 文档和说明
+# ===========================================
+# 临时文档
+temp-docs/
+draft-*.md
+temp-*.md
+
+# 聊天记录（如果不需要版本控制）
+chats/
+
+# ===========================================
+# 其他临时文件
+# ===========================================
+# 备份文件
+*.bak
+*.backup
+*.old
+
+# 临时目录
+temp/
+tmp/
+temporary/
+
+# 锁文件
+*.lock
+.lock
+
+# 进程文件
+*.pid
+*.sock
+
+# ===========================================
+# 特定于项目的忽略规则
+# ===========================================
+# 混淆演示文件（已移动到build目录）
+obfuscation_demo.html
+obfuscation_demo.js
+obfuscation_config.js
+OBFUSCATION_README.md
+OBFUSCATION_SUMMARY.md
+simple_obfuscate.js
+obfuscate.js
+test_wasm.html
+
+# 开发测试文件
+test_*.html
+demo_*.html
+temp_*.html
+
+# 构建脚本的临时输出
+build-temp/
+build-cache/
+build/
+
+# 必须保护的
+
+!scripts/build/
+
+# ===========================================
+# 注释说明
+# ===========================================
+# 这个 .gitignore 文件专门为 Bunny Ranaway Web 项目设计
+# 包含了游戏开发、WASM构建、代码混淆等相关的忽略规则
+# 
+# 主要忽略内容：
+# 1. 构建输出目录 (dist/)
+# 2. 临时混淆文件 (*.obfuscated.js)
+# 3. Rust/WASM 构建文件
+# 4. 开发工具和IDE文件
+# 5. 操作系统临时文件
+# 6. 敏感配置文件
+# 7. 测试和调试文件

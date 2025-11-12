@@ -1,0 +1,284 @@
+/**
+ * 组件样式文件 - 按钮、面板、控件
+ * 从 index.html 中提取的组件样式
+ */
+
+/* 控制按钮基础样式 */
+.control-btn {
+    background: rgba(255,255,255,0.2);
+    border: 2px solid #fff;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: inherit;
+    font-weight: normal;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+.control-btn:disabled {
+    background: rgba(255,255,255,0.1);
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 地图控制区域 */
+.map-controls {
+    margin-bottom: 20px;
+}
+
+.map-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.map-selector .control-btn {
+    font-size: inherit;
+    padding: 8px 12px;
+}
+
+/* 游戏选择器 */
+.game-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.game-selector .control-btn {
+    font-size: inherit;
+    padding: 8px 12px;
+}
+
+/* 文档按钮容器 */
+.documentation-button-container {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.documentation-btn {
+    width: 97%;
+    font-size: inherit;
+    padding: 8px 12px;
+    margin: 0;
+}
+
+/* 难度切换器 */
+.difficulty-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding: 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.toggle-label {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+}
+
+/* 模式切换开关 */
+.mode-switch {
+    position: relative;
+    width: 80px;
+    height: 28px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.3);
+    overflow: hidden;
+}
+
+.mode-switch::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.mode-switch.hard::before {
+    transform: translateX(52px);
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+}
+
+.mode-switch::after {
+    content: 'EASY';
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    font-size: 8px;
+    font-weight: bold;
+    color: rgba(255,255,255,0.9);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.mode-switch.hard::after {
+    content: 'HARD';
+    left: 52px;
+    color: rgba(255,255,255,0.9);
+}
+
+.toggle-text {
+    font-size: 18px;
+    color: rgba(255,255,255,0.7);
+    font-weight: normal;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+#easyModeText {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+#hardModeText {
+    color: rgba(255,255,255,0.7);
+    font-weight: normal;
+}
+
+/* 地图编号输入框 */
+.map-number-input {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.map-number-input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+/* 信息按钮和音乐按钮 */
+.info-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.9);
+    border: 2px solid #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 22px;
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.info-button:hover {
+    background: rgba(255,255,255,1);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.music-button {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.9);
+    border: 2px solid #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.music-button:hover {
+    background: rgba(255,255,255,1);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.music-button span {
+    font-size: 22px;
+    user-select: none;
+}
+
+/* 自定义静音图标样式 */
+.music-button.muted span {
+    position: relative;
+}
+
+.music-button.muted span::after {
+    content: '🚫';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    font-size: 16px;
+    background: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 信息菜单 */
+.info-menu {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: rgba(255,255,255,0.95);
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px 0;
+    min-width: 150px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    z-index: 99;
+    backdrop-filter: blur(10px);
+}
+
+.info-menu-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.info-menu-item:hover {
+    background: rgba(0,0,0,0.1);
+}
+
+.info-menu-item span {
+    font-size: 24px;
+}

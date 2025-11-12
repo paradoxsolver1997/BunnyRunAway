@@ -1,0 +1,111 @@
+{
+  "version": {
+    "number": "1.0.0",
+    "build": 0,
+    "description": "Bunny Runaway Canvas Version",
+    "platform": "Web/Canvas"
+  },
+  "game": {
+    "display": {
+      "fps": 60,
+      "canvas_width": 900,
+      "canvas_height": 700,
+      "map_size": 600
+    }
+  },
+  "bunny": {
+    "rendering": {
+      "scale": 1,
+      "visible": true,
+      "alpha": 1.0,
+      "debug_border": false,
+      "position_offset": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "animation": {
+      "frame_duration": 200,
+      "frames_per_animation": 2,
+      "auto_start": true,
+      "loop": true
+    },
+    "behavior": {
+      "pathfinding_algorithm": "bfs",
+      "auto_initialize": true,
+      "auto_start_movement": false,
+      "use_bunny_start_position": true
+    },
+    "default_speed": 70,
+    "speed_options": [50, 70, 90, 110]
+  },
+  "rendering": {
+    "scaling": {
+      "bunny": 0.1,
+      "fence": 0.075,
+      "stump": 0.1,
+      "hole": 0.5,
+      "stones": 0.3
+    },
+    "sizes": {
+      "node_radius": 8,
+      "hole_radius": 15,
+      "edge_width": 2,
+      "blocked_edge_width": 5,
+      "hole_edge_width": 3
+    },
+    "colors": {
+      "edge_normal": "#4a5568",
+      "edge_blocked": "#f56565",
+      "edge_hole": "#ed8936",
+      "node_normal": "#48bb78",
+      "node_hole": "#f56565",
+      "path_preview": "rgba(255, 182, 206, 0.8)",
+      "ui_background": "rgba(0, 0, 0, 0.7)",
+      "ui_text": "white",
+      "background_gradient_start": "#2d5a27",
+      "background_gradient_end": "#1a3d1a"
+    },
+    "effects": {
+      "hole_glow_color": "#ff6b6b",
+      "hole_glow_blur": 15,
+      "fence_rotation": true,
+      "stone_opacity": 0.6,
+      "stone_random_placement": true
+    }
+  },
+  "blockers": {
+    "visual": {
+      "color": [255, 0, 0],
+      "width": 5,
+      "dash_pattern": [8, 4],
+      "blink_duration": 0.5
+    },
+    "default_max_count": 5,
+    "max_options": [4, 5, 6, 7]
+  },
+  "map": {
+    "auto_scaling": true,
+    "margin": 50,
+    "center_map": true,
+    "decoration_density": 0.3,
+    "max_decorations": 10
+  },
+  "ui": {
+    "log_max_entries": 100,
+    "update_interval": 1000,
+    "animation_duration": 300
+  },
+  "performance": {
+    "cache_maps": true,
+    "max_cache_size": 10,
+    "preload_assets": true,
+    "lazy_load_decorations": false
+  },
+  "debug": {
+    "show_coordinates": false,
+    "show_scaling_info": false,
+    "log_level": "info",
+    "show_performance_metrics": true
+  }
+}

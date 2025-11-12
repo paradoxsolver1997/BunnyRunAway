@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐰 Bunny Runaway</title>
+    <!-- Markdown 渲染库 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+    
+    <!-- 外部样式文件 -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dialogs.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- 加载覆盖层 -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <h2>🐰 Loading Game System...</h2>
+        
+        <!-- 进度条容器 -->
+        <div class="loading-progress-container">
+            <div class="loading-progress-bar">
+                <div id="loadingProgressBar" class="loading-progress-fill"></div>
+            </div>
+            <div id="loadingPercentage" class="loading-percentage">0%</div>
+        </div>
+        
+        <!-- 详细状态信息 -->
+        <div class="loading-details">
+            <div id="loadingStatus" class="loading-status">Initializing...</div>
+            <div id="loadingDetails" class="loading-details-text">Preparing game systems...</div>
+            <div id="loadingStep" class="loading-step">Step 1 of 8</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>🐰 Bunny Runaway!</h1>
+        <p class="subtitle">A Strategic Puzzle Game Designed and Built by ParadoxSolver</p>
+        
+        <div class="game-area">
+            <div class="canvas-container">
+                <canvas id="gameCanvas" class="game-canvas" width="900" height="600"></canvas>
+                
+                <!-- 信息按钮 -->
+                <div class="info-button" id="infoButton">
+                    <span>ℹ️</span>
+                </div>
+                
+                <!-- 音乐控制按钮 -->
+                <div class="music-button" id="musicButton">
+                    <span id="musicIcon">🔊</span>
+                </div>
+                
+                <!-- 信息菜单 -->
+                <div class="info-menu" id="infoMenu" style="display: none;">
+                    <div class="info-menu-item" id="tutorialBtn">
+                        <span>📖</span> Tutorial
+                    </div>
+                    <div class="info-menu-item" id="aboutBtn">
+                        <span>ℹ️</span> About
+                    </div>
+                    <div class="info-menu-item" id="creditsBtn">
+                        <span>👥</span> Credits
+                    </div>
+                    <div class="info-menu-item" id="licenseBtn">
+                        <span>📄</span> License
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-panel">
+                <h3>🎮 Game Status</h3>
+                <div class="status-item">
+                    <span class="status-label">Game Status:</span>
+                    <span class="status-value" id="gameStatus">Initial</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Remaining Blockers:</span>
+                    <span class="status-value" id="blockerCount">0</span>
+                </div>
+                
+                <h3>🗺️ Map Controls</h3>
+                <div class="status-item">
+                    <span class="status-label">Map Info:</span>
+                    <span class="status-value" id="mapInfo">Not Loaded</span>
+                </div>
+                <div class="map-controls">
+                    <div class="difficulty-toggle">
+                        <span class="toggle-text" id="easyModeText">Easy mode</span>
+                        <div class="mode-switch" id="difficultyToggle" data-difficulty="easy">
+                        </div>
+                        <span class="toggle-text" id="hardModeText">Hard mode</span>
+                    </div>
+                    <div class="map-selector">
+                        <button class="control-btn" id="prevMapBtn" disabled>Previous Map</button>
+                        <button class="control-btn" id="nextMapBtn" disabled>Next Map</button>
+                        <button class="control-btn" id="randomMapBtn" disabled>Try Your Luck</button>
+                        <button class="control-btn" id="customMapBtn" disabled>Select Map</button>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <h3>🎯 Game Controls</h3>
+                    <div class="game-selector">
+                        <button class="control-btn" id="unifiedGameBtn" disabled>Start Game</button>
+                        <button class="control-btn" id="pauseBtn" disabled>Pause Game</button>
+                    </div>
+                    <div class="documentation-button-container">
+                        <button class="control-btn documentation-btn" id="showDocumentationBtn">📖 Show Documentation</button>
+                    </div>
+                </div>
+                
+                <!-- 版权信息 -->
+                <div class="copyright-info">
+                    <p>© 2025 ParadoxSolver | Bunny Runaway</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 文档区域 -->
+        <div class="documentation-section" id="documentationSection" style="display: none;">
+            <div class="documentation-header">
+                <h2>📖 Game Documentation</h2>
+                <button class="control-btn" id="toggleDocumentationBtn">Hide Documentation</button>
+            </div>
+            <div class="documentation-content" id="documentationContent">
+                <!-- Markdown 内容将在这里动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 自选地图对话框 -->
+    <div id="customMapDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content">
+            <h3>🎯 Custom Map Selection</h3>
+            <div class="dialog-body">
+                <label for="customMapNumber">Map Number (1-30):</label>
+                <input type="number" id="customMapNumber" class="map-number-input" 
+                       min="1" max="30" value="1">
+                <div class="dialog-buttons">
+                    <button class="control-btn" id="confirmCustomMap">Confirm</button>
+                    <button class="control-btn" id="cancelCustomMap">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 游戏胜利庆祝画面 -->
+    <div id="victoryDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content victory-content">
+            <div class="victory-header">
+                <h2 id="victoryTitle">🎉 Victory! 🎉</h2>
+                <p id="victoryMessage">Congratulations! You successfully trapped the bunny!</p>
+            </div>
+            <div class="dialog-buttons">
+                <button class="control-btn victory-btn" id="continueCurrentMapBtn">Continue with Current Map</button>
+                <button class="control-btn victory-btn" id="tryNextMapBtn">Try Next Map</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 教程对话框 -->
+    <div id="tutorialDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content info-dialog">
+            <h3>📖 Game Tutorial</h3>
+            <div class="dialog-body">
+                <div class="tutorial-content">
+                    <h4>🎯 How to Play</h4>
+                    <p><strong>Goal:</strong> Prevent the bunny from escaping through any of the four corner holes!</p>
+                    
+                    <h4>🎮 Controls</h4>
+                    <ul>
+                        <li><strong>Click on paths</strong> to place barriers</li>
+                        <li><strong>Start Game</strong> to begin the countdown</li>
+                        <li><strong>Pause Game</strong> to pause the game</li>
+                        <li><strong>Stop Game</strong> to end the current game</li>
+                    </ul>
+                    
+                    <h4>🧠 Strategy Tips</h4>
+                    <ul>
+                        <li>The bunny will always find the shortest path to escape</li>
+                        <li>Block multiple routes, not just one</li>
+                        <li>Use your barriers wisely - you have limited supplies</li>
+                        <li>Watch the bunny's movement patterns</li>
+                    </ul>
+                    
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button class="control-btn" id="readFullTutorialBtn" style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; font-weight: bold;">📖 Read Full Tutorial</button>
+                    </div>
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button class="control-btn" id="closeTutorialBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 关于游戏对话框 -->
+    <div id="aboutDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content info-dialog">
+            <h3>ℹ️ About Bunny Runaway</h3>
+            <div class="dialog-body">
+                <div class="about-content">
+                    <p><strong>Bunny Runaway</strong> is a strategic puzzle game that combines pathfinding AI with player strategy.</p>
+                    
+                    <h4>🎮 Game Features</h4>
+                    <ul>
+                        <li>🧠 Strategic gameplay with intelligent bunny AI</li>
+                        <li>🗺️ Multiple maps across Easy and Hard difficulties</li>
+                        <li>🌍 Multi-language support</li>
+                        <li>🎵 Immersive audio experience</li>
+                        <li>⚙️ Customizable game settings</li>
+                    </ul>
+                    
+                    <h4>📊 Game Info</h4>
+                    <ul>
+                        <li><strong>Version:</strong> 1.0</li>
+                        <li><strong>Release Year:</strong> 2025</li>
+                        <li><strong>Developer:</strong> ParadoxSolver</li>
+                        <li><strong>Platform:</strong> Web Browser</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button class="control-btn" id="closeAboutBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 制作人员对话框 -->
+    <div id="creditsDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content info-dialog">
+            <h3>👥 Credits</h3>
+            <div class="dialog-body">
+                <div class="credits-content">
+                    <h4>🎮 Game Development</h4>
+                    <p><strong>Developer:</strong> ParadoxSolver</p>
+                    <p><strong>Game Design:</strong> Strategic Puzzle Mechanics</p>
+                    <p><strong>AI Programming:</strong> Pathfinding & Decision Making</p>
+                    
+                    <h4>🎨 Assets & Resources</h4>
+                    <p><strong>Graphics:</strong> Custom pixel art and sprites</p>
+                    <p><strong>Audio:</strong> Background music and sound effects</p>
+                    <p><strong>Fonts:</strong> Source Sans 3, Source Han Sans</p>
+                    
+                    <h4>🌍 Localization</h4>
+                    <p>Multi-language support for English, Chinese, Japanese, Korean, German, French, and Spanish</p>
+                    
+                    <h4>💻 Technology</h4>
+                    <p><strong>Frontend:</strong> HTML5 Canvas, JavaScript ES6+</p>
+                    <p><strong>Architecture:</strong> Modular Component System</p>
+                    <p><strong>State Management:</strong> Custom State Machine</p>
+                    
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button class="control-btn" id="readFullCreditsBtn" style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; font-weight: bold;">👥 Read Full Credits</button>
+                    </div>
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button class="control-btn" id="closeCreditsBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 许可证对话框 -->
+    <div id="licenseDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content info-dialog">
+            <h3>📄 License</h3>
+            <div class="dialog-body">
+                <div class="license-content">
+                    <h4>© 2025 ParadoxSolver. All Rights Reserved.</h4>
+                    
+                    <h4>Game Information</h4>
+                    <ul>
+                        <li><strong>Game Title:</strong> Bunny Runaway</li>
+                        <li><strong>Developer:</strong> ParadoxSolver</li>
+                        <li><strong>Release Year:</strong> 2025</li>
+                        <li><strong>Platform:</strong> Web Browser</li>
+                    </ul>
+                    
+                    <h4>License Terms</h4>
+                    <p>This game is provided for personal entertainment purposes. All game content, including graphics, audio, and code, is protected by copyright law.</p>
+                    
+                    <p><strong>Usage Rights:</strong> You may play this game for personal enjoyment. Commercial use, redistribution, or modification without permission is prohibited.</p>
+                    
+                    <p><strong>Disclaimer:</strong> This game is provided "as is" without warranty of any kind.</p>
+                    
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button class="control-btn" id="readFullLicenseBtn" style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; font-weight: bold;">📄 Read Full License</button>
+                    </div>
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button class="control-btn" id="closeLicenseBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 停止游戏确认对话框 -->
+    <div id="stopGameDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content">
+            <h3>Stop Game</h3>
+            <div class="dialog-body">
+                <p>Are you sure you want to stop the current game?</p>
+            </div>
+            <div class="dialog-buttons">
+                <button class="control-btn" id="confirmStopBtn">Yes, Stop</button>
+                <button class="control-btn" id="cancelStopBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新游戏对话框 -->
+    <div id="newGameDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content">
+            <h3>New Game</h3>
+            <div class="dialog-body">
+                <p>Would you like to proceed to the next map?</p>
+            </div>
+            <div class="dialog-buttons">
+                <button class="control-btn" id="confirmNewGameBtn">Next Map</button>
+                <button class="control-btn" id="cancelNewGameBtn">Restart Current</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 地图选择对话框 -->
+    <div id="mapSelectionDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content">
+            <h3>Map Selection</h3>
+            <div class="dialog-body">
+                <p>Select a map to play:</p>
+                <div class="map-options">
+                    <button class="control-btn" id="nextMapBtn">Next Map</button>
+                    <button class="control-btn" id="randomMapBtn">Random Map</button>
+                    <button class="control-btn" id="customMapBtn">Custom Map</button>
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button class="control-btn" id="confirmMapSelectionBtn">Start Game</button>
+                <button class="control-btn" id="cancelMapSelectionBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 完整文档显示对话框 -->
+    <div id="fullDocumentDialog" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content info-dialog" style="max-width: 90vw; max-height: 90vh;">
+            <h3 id="fullDocumentTitle">📖 Full Document</h3>
+            <div class="dialog-body">
+                <div id="fullDocumentContent" style="text-align: left; line-height: 1.6;">
+                    <!-- 完整文档内容将在这里动态加载 -->
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button class="control-btn" id="closeFullDocumentBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 纯JavaScript游戏初始化脚本 -->
+    <!-- 模块化脚本 - 纯JavaScript版本 -->
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>

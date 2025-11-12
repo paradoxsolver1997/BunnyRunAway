@@ -1,0 +1,57 @@
+{
+  "name": "bunny-runaway",
+  "version": "1.0.0",
+  "description": "Bunny Runaway - Strategic puzzle game where you prevent a clever bunny from escaping through corner holes",
+  "main": "index.html",
+  "homepage": "https://github.com/ParadoxSolver/bunny-runaway",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ParadoxSolver/bunny-runaway.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ParadoxSolver/bunny-runaway/issues"
+  },
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "start": "python -m http.server 8000",
+    "build": "node scripts/build/build-with-light-obfuscation.js",
+    "deploy:cloudflare": "node scripts/deploy/deploy.js cloudflare",
+    "deploy:itch": "node scripts/deploy/deploy.js itch",
+    "deploy:github": "node scripts/deploy/deploy.js github",
+    "deploy:all": "npm run build && npm run deploy:cloudflare && npm run deploy:itch",
+    "test": "echo 'Open http://localhost:8000/index.html to test pure JS version'",
+    "test:build": "echo 'Open http://localhost:8000/dist/index.html to test obfuscated version'",
+    "dist": "npm run build && echo 'Production build ready in dist/ directory'"
+  },
+  "keywords": [
+    "game",
+    "puzzle",
+    "strategy",
+    "javascript",
+    "canvas",
+    "pathfinding",
+    "bunny",
+    "escape",
+    "barriers",
+    "ai",
+    "web-game",
+    "browser-game"
+  ],
+  "author": "ParadoxSolver",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "index.html",
+    "src/",
+    "css/",
+    "assets/",
+    "config/",
+    "docs/",
+    "scripts/"
+  ],
+  "devDependencies": {
+    "javascript-obfuscator": "^4.1.1"
+  }
+}

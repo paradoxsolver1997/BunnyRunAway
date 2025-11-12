@@ -1,0 +1,184 @@
+/**
+ * 响应式样式文件 - 媒体查询和适配
+ * 从 index.html 中提取的响应式样式
+ */
+
+/* 基础响应式设计 */
+@media (max-width: 768px) {
+    .documentation-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .documentation-content {
+        padding: 20px;
+        max-height: 60vh;
+    }
+    
+    .documentation-content h1 {
+        font-size: 32px;
+    }
+    
+    .documentation-content h2 {
+        font-size: 24px;
+    }
+}
+
+/* 响应式对话框居中 - 当只有Game Status面板可见时 */
+@media (max-width: 1200px) {
+    /* 当窗口宽度小于1200px时，假设只有Game Status面板可见 */
+    .dialog-overlay {
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .dialog-content {
+        margin: 0 auto;
+        max-width: 90vw;
+        max-height: 90vh;
+    }
+}
+
+/* 更精确的响应式控制 - 当文档区域隐藏时 */
+.documentation-section[style*="display: none"] ~ .dialog-overlay {
+    /* 当文档区域隐藏时，对话框居中显示 */
+    justify-content: center;
+    align-items: center;
+}
+
+/* 当只有Game Status面板可见时的特殊样式 */
+.game-area:only-child .dialog-overlay,
+.info-panel:only-visible-child ~ .dialog-overlay {
+    justify-content: center;
+    align-items: center;
+}
+
+/* 响应式对话框内容调整 */
+@media (max-width: 1000px) {
+    .dialog-content {
+        margin: 20px;
+        max-width: calc(100vw - 40px);
+        max-height: calc(100vh - 40px);
+    }
+    
+    .info-dialog {
+        max-width: calc(100vw - 40px);
+        max-height: calc(100vh - 40px);
+    }
+}
+
+/* 响应式居中类 - 通过JavaScript动态添加 */
+.dialog-overlay.responsive-center {
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.dialog-overlay.responsive-center .dialog-content {
+    margin: 0 auto !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    transform: none !important;
+}
+
+.dialog-overlay.responsive-center .info-dialog {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+}
+
+/* 移动端优化 */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .game-area {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .info-panel {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .control-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    
+    .map-selector,
+    .game-selector {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* 平板端优化 */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .game-area {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px; /* 增加垂直间距 */
+    }
+    
+    .info-panel {
+        width: 100%;
+        max-width: 600px;
+        order: 2; /* 确保信息面板在Canvas下方 */
+    }
+    
+    .canvas-container {
+        order: 1; /* 确保Canvas在上方 */
+        margin: 0 auto; /* 居中显示 */
+    }
+}
+
+/* 中等屏幕优化 */
+@media (min-width: 1025px) and (max-width: 1399px) {
+    .game-area {
+        justify-content: center;
+        align-items: flex-start;
+        gap: 25px;
+        flex-wrap: nowrap; /* 中等屏幕保持横向布局 */
+    }
+    
+    .canvas-container {
+        flex-shrink: 0;
+    }
+    
+    .info-panel {
+        flex-shrink: 1;
+        min-width: 350px;
+    }
+}
+
+/* 大屏幕优化 */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1600px;
+    }
+    
+    /* 使用更安全的Canvas缩放方式，避免布局冲突 */
+    .game-canvas {
+        /* 移除transform缩放，改用CSS尺寸调整 */
+        width: 990px !important;  /* 900 * 1.1 */
+        height: 660px !important; /* 600 * 1.1 */
+        max-width: none;
+        max-height: none;
+    }
+    
+    /* 调整Canvas容器以适应新的尺寸 */
+    .canvas-container {
+        width: 990px;
+        height: 660px;
+        flex-shrink: 0;
+    }
+    
+    /* 确保游戏区域有足够空间 */
+    .game-area {
+        justify-content: center;
+        align-items: flex-start;
+        gap: 30px; /* 增加间距以适应更大的Canvas */
+    }
+}
