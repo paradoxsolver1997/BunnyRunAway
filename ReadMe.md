@@ -214,6 +214,10 @@ tutorialCommands.help()     // Show help
 
 GPL3 - see [LICENSE](LICENSE)
 
+## ❤️ Special Thanks
+
+For open source and media attributions, see [`docs/credits.html`](docs/credits.html).
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please open issues or pull requests.
